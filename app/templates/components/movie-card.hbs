@@ -1,20 +1,19 @@
-<div>
-  <div>
-    <label>Title: </label><span>{{this.movie.title}}</span>
-  </div>
-  <div>
-    <label>Director: </label><span>{{this.movie.director}}</span>
-  </div>
-  <div>
-    <label>Producer: </label><span>{{this.movie.producer}}</span>
-  </div>
-  <div>
-    <label>Release date: </label><span>{{this.movie.release_date}}</span>
-  </div>
-  <div>
-    <label>Rating: </label><span>{{this.movie.rt_score}}/100</span>
-  </div>
-  <div>
-    <label>Description: </label><span>{{this.movie.description}}</span>
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">{{this.movie.title}}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">{{this.movie.release_date}}</h6>
+    <div>
+      <strong>Director:&nbsp;</strong><span class="card-text">{{this.movie.director}}</span>
+    </div>
+    <div>
+      <strong>Producer:&nbsp;</strong><span class="card-text">{{this.movie.producer}}</span>
+    </div>
+    <div>
+      <strong>Rating:&nbsp;</strong><span class="card-text">{{this.movie.rt_score}}/100</span>
+    </div>
+    <div>
+      <strong>Description:&nbsp;</strong><span class="card-text">{{this.movie.description}}</span>
+    </div>
+    <a href="#" class="card-link">More...</a>
   </div>
 </div>
