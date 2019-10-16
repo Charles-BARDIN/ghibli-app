@@ -6,8 +6,8 @@ const Router = EmberRouter.extend({
   rootURL: config.rootURL
 });
 
-Router.map(function() {
-  this.route('movie-list');
+Router.map(function () {
+  this.route('movies');
 });
 
 export default Router;
