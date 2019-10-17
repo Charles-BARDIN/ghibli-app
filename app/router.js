@@ -11,6 +11,7 @@ Router.map(function () {
   this.route('not-found', { path: '/*path' });
   this.route('movie', { path: '/movie/:id' });
   this.route('people', { path: '/people/:id' });
+  this.route('location');
 });
 
 export default Router;
