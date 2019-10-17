@@ -1,7 +1,7 @@
 <div>
   <h1 class="page-title">Studio Ghibli's movies</h1>
 
-  {{#each this.model as |movie|}}
+  {{#each this.model.movies as |movie|}}
   <MovieCard @movie={{movie}} />
   {{/each}}
 </div>

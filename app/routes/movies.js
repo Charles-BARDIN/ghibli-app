@@ -4,6 +4,6 @@ import { inject as service } from '@ember/service';
 export default Route.extend({
   movie: service(),
   model() {
-    return this.movie.getMovieList()
+    return this.movie.getMovieProducersAndDirectorsLists()
   }
 });
