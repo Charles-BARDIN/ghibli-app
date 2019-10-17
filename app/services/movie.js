@@ -1,7 +1,7 @@
 import Service from '@ember/service';
 import { set } from '@ember/object';
 
-const GHIBLI_API_MOVIE_BASE_URL = 'https://ghibliapi.herokuapp.com/films'
+const GHIBLI_API_MOVIE_FETCH_URL = 'https://ghibliapi.herokuapp.com/films'
 
 // See https://guides.emberjs.com/release/tutorial/service/
 export default Service.extend({
@@ -14,10 +14,10 @@ export default Service.extend({
   },
   async getMovieList() {
     if (this.movieList.length === 0) {
-      const response = await fetch(GHIBLI_API_MOVIE_BASE_URL)
+      const response = await fetch(GHIBLI_API_MOVIE_FETCH_URL)
       this.movieList = await response.json()
     }
 
     return this.movieList
-  }
+  },
 });
