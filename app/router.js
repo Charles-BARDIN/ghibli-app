@@ -12,6 +12,7 @@ Router.map(function () {
   this.route('movie', { path: '/movie/:id' });
   this.route('people', { path: '/people/:id' });
   this.route('location', { path: '/location/:id' });
+  this.route('vehicle', { path: '/vehicle/:id' });
 });
 
 export default Router;
