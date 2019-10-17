@@ -25,8 +25,7 @@ export default Service.extend({
   },
   async getByID(id) {
     const locations = await this._getLocationsList()
-    console.log(locations
-      .find(loc => id.includes(loc.id)))
+
     return locations
       .find(loc => id.includes(loc.id))
   },
