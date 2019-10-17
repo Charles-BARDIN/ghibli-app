@@ -77,6 +77,15 @@ export default Service.extend({
       producers
     }
   },
+  async getRandomUnseenMovieID() {
+    const unseenMovieIDs = this.movieList
+      .filter(m => !m.seen)
+      .map(m => m.id)
+
+    const randomIndex = Math.floor(Math.random() * unseenMovieIDs.length)
+
+    return unseenMovieIDs[randomIndex]
+  },
   markAsSeen(movieID) {
     const movie = this.movieList.find(m => m.id === movieID)
 
@@ -86,9 +95,10 @@ export default Service.extend({
 
     set(movie, 'seen', true)
 
-    const moviesSeen = localStorage.getItem('movies-seen') || []
+    const moviesSeen = JSON.parse(localStorage.getItem('movies-seen') || "[]")
+
     moviesSeen.push(movieID)
-    localStorage.setItem('movies-seen', moviesSeen)
+    localStorage.setItem('movies-seen', JSON.stringify(moviesSeen))
   },
   markAsNotSeen(movieID) {
     const movie = this.movieList.find(m => m.id === movieID)
@@ -98,8 +108,8 @@ export default Service.extend({
     }
 
     set(movie, 'seen', false)
-    const moviesSeen = localStorage.getItem('movies-seen') || []
+    const moviesSeen = JSON.parse(localStorage.getItem('movies-seen') || "[]")
     const _newMoviesSeen = moviesSeen.filter(id => id !== movieID)
-    localStorage.setItem('movies-seen', _newMoviesSeen)
+    localStorage.setItem('movies-seen', JSON.stringify(_newMoviesSeen))
   },
 });
