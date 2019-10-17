@@ -1,0 +1,25 @@
+<div class="vehicle">
+  <h1 class="card-title">{{this.model.name}}</h1>
+
+  <div>
+    <strong>Description:&nbsp;</strong><span class="card-text">{{this.model.description}}</span>
+  </div>
+
+  <div>
+    <strong>Vehicle class:&nbsp;</strong><span class="card-text">{{this.model.vehicle_class}}</span>
+  </div>
+
+  <div>
+    <strong>Length:&nbsp;</strong><span class="card-text">{{this.model.length}}</span>
+  </div>
+
+  <div>
+    <strong>Pilot:&nbsp;</strong>
+    <LinkTo @route="people" @model={{this.model.pilot.id}} class="card-link">{{this.model.pilot.name}}</LinkTo>
+  </div>
+
+  <div>
+    <strong>Movie:&nbsp;</strong>
+    <LinkTo @route="movie" @model={{this.model.films.id}} class="card-link">{{this.model.films.title}}</LinkTo>
+  </div>
+</div>
