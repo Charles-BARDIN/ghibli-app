@@ -34,3 +34,9 @@
 .vehicle {
   padding: 5px;
 }
+
+.toogle-seen-button {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
