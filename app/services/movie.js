@@ -31,7 +31,8 @@ export default Service.extend({
 
       this._recoverPromise = recovery()
 
-      this.movieList = await this._recoverPromise
+      this.movieList = (await this._recoverPromise)
+        .sort((a, b) => Number(a.release_date) - Number(b.release_date))
 
       this._isRecovering = false
       this._recoverPromise = undefined
