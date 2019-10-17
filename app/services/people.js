@@ -21,10 +21,15 @@ export default Service.extend({
 
     this._super(...arguments);
   },
-  async getByIDs(ids) {
+  async getByIDs(id) {
     const people = await this._getPeopleList()
 
-    return people.filter(p => ids.includes(p.id))
+    return people.filter(p => id.includes(p.id))
+  },
+  async getByID(id) {
+    const people = await this._getPeopleList()
+
+    return people.find(p => id.includes(p.id))
   },
   async getByMovieID(movieID) {
     const people = await this._getPeopleList()

@@ -10,6 +10,7 @@ Router.map(function () {
   this.route('movies');
   this.route('not-found', { path: '/*path' });
   this.route('movie', { path: '/movie/:id' });
+  this.route('people', { path: '/people/:id' });
 });
 
 export default Router;

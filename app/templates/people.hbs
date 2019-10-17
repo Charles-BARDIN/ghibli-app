@@ -1,0 +1,32 @@
+<div class="people">
+  <h1 class="card-title">{{this.model.name}}</h1>
+
+  <div>
+    <strong>Gender:&nbsp;</strong><span class="card-text">{{this.model.gender}}</span>
+  </div>
+
+  <div>
+    <strong>Age:&nbsp;</strong><span class="card-text">{{this.model.age}}</span>
+  </div>
+
+  <div>
+    <strong>Eye color:&nbsp;</strong><span class="card-text">{{this.model.eye_color}}</span>
+  </div>
+
+  <div>
+    <strong>Hair color:&nbsp;</strong><span class="card-text">{{this.model.hair_color}}</span>
+  </div>
+
+  <div>
+    <strong>Specie:&nbsp;</strong><span class="card-text">{{this.model.species.name}}</span>
+  </div>
+
+  <h5>Movies</h5>
+  <ul>
+    {{#each this.model.films as |movie|}}
+    <li>
+      <LinkTo @route="movie" @model={{movie.id}} class="card-link">{{movie.title}}</LinkTo>
+    </li>
+    {{/each}}
+  </ul>
+</div>
