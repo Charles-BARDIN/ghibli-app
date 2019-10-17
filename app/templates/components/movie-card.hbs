@@ -14,6 +14,6 @@
     <div>
       <strong>Description:&nbsp;</strong><span class="card-text">{{this.movie.description}}</span>
     </div>
-    <a href="#" class="card-link">More...</a>
+    <LinkTo @route="movie" @model={{this.movie.id}} class="card-link">More...</LinkTo>
   </div>
 </div>
