@@ -27,7 +27,7 @@ export default Service.extend({
 
     return vehicle
       .filter(vehi => {
-        const _movieID = getMovieIDFromURL(vehi.films)
+        const _movieID = vehi.films.id
 
         return _movieID === movieID
       })
@@ -77,7 +77,7 @@ export default Service.extend({
   },
   async _attachMovieToVehicle(vehicle, id) {
     const movies = await this.movie.getByIDs([id])
-    vehicle.movies = (movies || [])
+    vehicle.films = (movies || [])
       .map(m => {
         return {
           id: m.id,
