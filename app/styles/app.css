@@ -6,3 +6,11 @@
   margin-left: 10px;
   margin-bottom: 10px;
 }
+
+.movie h5 {
+  margin-top: 10px;
+}
+
+.movie {
+  padding: 5px;
+}

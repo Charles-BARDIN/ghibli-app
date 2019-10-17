@@ -1,1 +1,40 @@
-{{this.model.title}}
+<div class="movie">
+  <h1 class="card-title">
+    <span>{{this.model.title}}</span>
+    <span class="card-subtitle mb-2 text-muted">({{this.model.release_date}})</span>
+  </h1>
+
+  <div>
+    <strong>Director:&nbsp;</strong><span class="card-text">{{this.model.director}}</span>
+  </div>
+  <div>
+    <strong>Producer:&nbsp;</strong><span class="card-text">{{this.model.producer}}</span>
+  </div>
+  <div>
+    <strong>Rating:&nbsp;</strong><span class="card-text">{{this.model.rt_score}}/100</span>
+  </div>
+  <div>
+    <strong>Description:&nbsp;</strong><span class="card-text">{{this.model.description}}</span>
+  </div>
+
+  <h5>People</h5>
+  <ul>
+    {{#each this.model.people as |people|}}
+    <li><a href="#" class="card-link">{{people.name}}</a></li>
+    {{/each}}
+  </ul>
+
+  <h5>Locations</h5>
+  <ul>
+    {{#each this.model.locations as |location|}}
+    <li><a href="#" class="card-link">{{location.name}}</a></li>
+    {{/each}}
+  </ul>
+
+  <h5>Vehicles</h5>
+  <ul>
+    {{#each this.model.vehicles as |vehicle|}}
+    <li><a href="#" class="card-link">{{vehicle.name}}</a></li>
+    {{/each}}
+  </ul>
+</div>
