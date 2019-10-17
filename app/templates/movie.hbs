@@ -20,7 +20,9 @@
   <h5>People</h5>
   <ul>
     {{#each this.model.people as |people|}}
-    <li><a href="#" class="card-link">{{people.name}}</a></li>
+    <li>
+      <LinkTo @route="people" @model={{people.id}} class="card-link">{{people.name}}</LinkTo>
+    </li>
     {{/each}}
   </ul>
 
