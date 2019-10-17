@@ -22,6 +22,11 @@ export default Service.extend({
 
     return vehicles.filter(v => ids.includes(v.id))
   },
+  async getByID(id) {
+    const vehicles = await this._getVehicleList()
+
+    return vehicles.find(v => id === v.id)
+  },
   async getByMovieID(movieID) {
     const vehicle = await this._getVehicleList()
 
