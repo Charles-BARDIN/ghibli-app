@@ -1,7 +1,7 @@
 import Service, { inject as service } from '@ember/service';
 import { set } from '@ember/object';
 
-import { getPeopleIDFromURL, getMovieIDFromURL } from '../helpers'
+import { getPeopleIDFromURL, getMovieIDFromURL, removeTODOFromReceivedData } from '../helpers'
 
 const GHIBLI_API_LOCATION_FETCH_URL = 'https://ghibliapi.herokuapp.com/locations'
 
@@ -22,6 +22,13 @@ export default Service.extend({
 
     return locations
       .filter(loc => ids.includes(loc.id))
+  },
+  async getByID(id) {
+    const locations = await this._getLocationsList()
+    console.log(locations
+      .find(loc => id.includes(loc.id)))
+    return locations
+      .find(loc => id.includes(loc.id))
   },
   async getByMovieID(movieID) {
     const location = await this._getLocationsList()
@@ -44,7 +51,7 @@ export default Service.extend({
 
       const recovery = async () => {
         const response = await fetch(GHIBLI_API_LOCATION_FETCH_URL)
-        const rawLocationsList = await response.json()
+        const rawLocationsList = removeTODOFromReceivedData(await response.json())
 
         const promises = []
 
