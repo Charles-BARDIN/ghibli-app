@@ -30,7 +30,8 @@
   <ul>
     {{#each this.model.locations as |location|}}
     <li>
-      <LinkTo @route="location" @model={{location.id}} class="card-link">{{location.name}}</LinkTo>
+      <LinkTo @route="location" @model={{location.id}} class="card-link">{{location.name}}
+      </LinkTo>
     </li>
     {{/each}}
   </ul>
@@ -38,7 +39,9 @@
   <h5>Vehicles</h5>
   <ul>
     {{#each this.model.vehicles as |vehicle|}}
-    <li><a href="#" class="card-link">{{vehicle.name}}</a></li>
+    <li>
+      <LinkTo @route="vehicle" @model={{vehicle.id}} class="card-link">{{vehicle.name}}</LinkTo>
+    </li>
     {{/each}}
   </ul>
 </div>
