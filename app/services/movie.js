@@ -44,5 +44,28 @@ export default Service.extend({
     const movies = await this.getMovieList()
 
     return movies.filter(m => ids.includes(m.id))
+  },
+  async getProducersList() {
+    const movies = await this.getMovieList()
+
+    return [...new Set(movies.map(m => m.producer))]
+  },
+  async getDirectorsList() {
+    const movies = await this.getMovieList()
+
+    return [...new Set(movies.map(m => m.director))]
+  },
+  async getMovieProducersAndDirectorsLists() {
+    const [movies, directors, producers] = await Promise.all([
+      this.getMovieList(),
+      this.getDirectorsList(),
+      this.getProducersList(),
+    ])
+
+    return {
+      movies,
+      directors,
+      producers
+    }
   }
 });

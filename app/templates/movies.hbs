@@ -1,7 +1,20 @@
 <div>
   <h1 class="page-title">Studio Ghibli's movies</h1>
-
-  {{#each this.model as |movie|}}
+  {{#each this.model.movies as |movie|}}
   <MovieCard @movie={{movie}} />
   {{/each}}
+
+  <h1 class="page-title">Studio Ghibli's directors</h1>
+  <ul>
+    {{#each this.model.directors as |director|}}
+    <li>{{director}}</li>
+    {{/each}}
+  </ul>
+
+  <h1 class="page-title">Studio Ghibli's producers</h1>
+  <ul>
+    {{#each this.model.producers as |producer|}}
+    <li>{{producer}}</li>
+    {{/each}}
+  </ul>
 </div>
