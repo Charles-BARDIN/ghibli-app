@@ -1,7 +1,7 @@
 import Service, { inject as service } from '@ember/service';
 import { set } from '@ember/object';
 
-import { getPeopleIDFromURL, getMovieIDFromURL } from '../helpers'
+import { getPeopleIDFromURL, getMovieIDFromURL, removeTODOFromReceivedData } from '../helpers'
 
 const GHIBLI_API_LOCATION_FETCH_URL = 'https://ghibliapi.herokuapp.com/locations'
 
@@ -23,13 +23,18 @@ export default Service.extend({
     return locations
       .filter(loc => ids.includes(loc.id))
   },
+  async getByID(id) {
+    const locations = await this._getLocationsList()
+
+    return locations
+      .find(loc => id.includes(loc.id))
+  },
   async getByMovieID(movieID) {
     const location = await this._getLocationsList()
 
     return location
       .filter(loc => {
-        const movieIDs = loc.films
-          .map(getMovieIDFromURL)
+        const movieIDs = loc.films.map(m => m.id)
 
         return movieIDs.includes(movieID)
       })
@@ -44,7 +49,7 @@ export default Service.extend({
 
       const recovery = async () => {
         const response = await fetch(GHIBLI_API_LOCATION_FETCH_URL)
-        const rawLocationsList = await response.json()
+        const rawLocationsList = removeTODOFromReceivedData(await response.json())
 
         const promises = []
 
@@ -64,25 +69,26 @@ export default Service.extend({
 
     return this.locationsList
   },
-  async _attachEntitiesToLocation(loc) {
+  async _attachEntitiesToLocation(location) {
     const promises = []
 
-    const peopleIDs = loc.residents
+    const peopleIDs = location.residents
       .map(getPeopleIDFromURL)
       .filter(id => id != null)
     promises.push(this._attachPeopleToLocation(location, peopleIDs))
 
-    const movieIDs = loc.films
+    const movieIDs = location.films
       .map(getMovieIDFromURL)
       .filter(id => id != null)
     promises.push(this._attachMovieToLocation(location, movieIDs))
 
     await Promise.all(promises)
 
-    return loc
+    return location
   },
   async _attachPeopleToLocation(location, ids) {
     const people = await this.people.getByIDs(ids)
+
     location.residents = people
       .map(p => {
         return {

@@ -1,6 +1,8 @@
 import Service from '@ember/service';
 import { set } from '@ember/object';
 
+import { removeTODOFromReceivedData } from '../helpers'
+
 const GHIBLI_API_MOVIE_FETCH_URL = 'https://ghibliapi.herokuapp.com/films'
 
 // See https://guides.emberjs.com/release/tutorial/service/
@@ -24,7 +26,7 @@ export default Service.extend({
 
       const recovery = async () => {
         const response = await fetch(GHIBLI_API_MOVIE_FETCH_URL)
-        return await response.json()
+        return removeTODOFromReceivedData(await response.json())
       }
 
       this._recoverPromise = recovery()

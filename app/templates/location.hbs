@@ -1,0 +1,32 @@
+<div class="location">
+  <h1 class="card-title">{{this.model.name}}</h1>
+
+  <div>
+    <strong>Climate:&nbsp;</strong><span class="card-text">{{this.model.climate}}</span>
+  </div>
+  <div>
+    <strong>Terrain:&nbsp;</strong><span class="card-text">{{this.model.terrain}}</span>
+  </div>
+
+  <div>
+    <strong>Surface water:&nbsp;</strong><span class="card-text">{{this.model.surface_water}}</span>
+  </div>
+
+  <h5>Residents</h5>
+  <ul>
+    {{#each this.model.residents as |resident|}}
+    <li>
+      <LinkTo @route="people" @model={{resident.id}} class="card-link">{{resident.name}}</LinkTo>
+    </li>
+    {{/each}}
+  </ul>
+
+  <h5>Movies</h5>
+  <ul>
+    {{#each this.model.films as |movie|}}
+    <li>
+      <LinkTo @route="movie" @model={{movie.id}} class="card-link">{{movie.title}}</LinkTo>
+    </li>
+    {{/each}}
+  </ul>
+</div>

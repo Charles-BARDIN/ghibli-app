@@ -1,7 +1,7 @@
 import Service, { inject as service } from '@ember/service';
 import { set } from '@ember/object';
 
-import { getMovieIDFromURL, getPeopleIDFromURL } from '../helpers'
+import { getMovieIDFromURL, getPeopleIDFromURL, removeTODOFromReceivedData } from '../helpers'
 
 const GHIBLI_API_VEHICLE_FETCH_URL = 'https://ghibliapi.herokuapp.com/vehicles'
 
@@ -27,7 +27,7 @@ export default Service.extend({
 
     return vehicle
       .filter(vehi => {
-        const _movieID = getMovieIDFromURL(vehi.films)
+        const _movieID = vehi.films.id
 
         return _movieID === movieID
       })
@@ -42,7 +42,7 @@ export default Service.extend({
 
       const recovery = async () => {
         const response = await fetch(GHIBLI_API_VEHICLE_FETCH_URL)
-        const rawVehicleList = await response.json()
+        const rawVehicleList = removeTODOFromReceivedData(await response.json())
 
         const promises = []
 
@@ -77,7 +77,7 @@ export default Service.extend({
   },
   async _attachMovieToVehicle(vehicle, id) {
     const movies = await this.movie.getByIDs([id])
-    vehicle.movies = (movies || [])
+    vehicle.films = (movies || [])
       .map(m => {
         return {
           id: m.id,
