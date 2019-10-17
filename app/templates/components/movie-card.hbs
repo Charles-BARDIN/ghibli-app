@@ -1,10 +1,10 @@
 <div class="card">
   <div>
     {{#if this.movie.seen}}
-    <button type="button" class="btn btn-outline-primary toogle-seen-button"
+    <button type="button" class="btn btn-outline-success toogle-seen-button"
       onclick={{action "markAsNotSeen" this.movie.id}}>Seen</button>
     {{else}}
-    <button type="button" class="btn btn-outline-primary toogle-seen-button"
+    <button type="button" class="btn btn-outline-warning toogle-seen-button"
       onclick={{action "markAsSeen" this.movie.id}}>Not seen</button>
     {{/if}}
   </div>
