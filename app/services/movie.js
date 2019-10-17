@@ -84,7 +84,7 @@ export default Service.extend({
       return
     }
 
-    movie.seen = true
+    set(movie, 'seen', true)
 
     const moviesSeen = localStorage.getItem('movies-seen') || []
     moviesSeen.push(movieID)
@@ -97,7 +97,7 @@ export default Service.extend({
       return
     }
 
-    movie.seen = false
+    set(movie, 'seen', false)
     const moviesSeen = localStorage.getItem('movies-seen') || []
     const _newMoviesSeen = moviesSeen.filter(id => id !== movieID)
     localStorage.setItem('movies-seen', _newMoviesSeen)
