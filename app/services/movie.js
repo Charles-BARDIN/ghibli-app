@@ -2,6 +2,7 @@ import Service from '@ember/service';
 import { set } from '@ember/object';
 
 import { removeTODOFromReceivedData } from '../helpers'
+import movie from '../routes/movie';
 
 const GHIBLI_API_MOVIE_FETCH_URL = 'https://ghibliapi.herokuapp.com/films'
 
@@ -26,7 +27,15 @@ export default Service.extend({
 
       const recovery = async () => {
         const response = await fetch(GHIBLI_API_MOVIE_FETCH_URL)
-        return removeTODOFromReceivedData(await response.json())
+        const moviesSeen = localStorage.getItem('movies-seen') || []
+
+        const result = (await response.json())
+          .map(movie => {
+            movie.seen = moviesSeen.includes(movie.id)
+            return movie
+          })
+
+        return removeTODOFromReceivedData(result)
       }
 
       this._recoverPromise = recovery()
@@ -67,5 +76,30 @@ export default Service.extend({
       directors,
       producers
     }
-  }
+  },
+  markAsSeen(movieID) {
+    const movie = this.movieList.find(m => m.id === movieID)
+
+    if (!movie) {
+      return
+    }
+
+    movie.seen = true
+
+    const moviesSeen = localStorage.getItem('movies-seen') || []
+    moviesSeen.push(movieID)
+    localStorage.setItem('movies-seen', moviesSeen)
+  },
+  markAsNotSeen(movieID) {
+    const movie = this.movieList.find(m => m.id === movieID)
+
+    if (!movie) {
+      return
+    }
+
+    movie.seen = false
+    const moviesSeen = localStorage.getItem('movies-seen') || []
+    const _newMoviesSeen = moviesSeen.filter(id => id !== movieID)
+    localStorage.setItem('movies-seen', _newMoviesSeen)
+  },
 });
